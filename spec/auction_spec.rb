@@ -10,7 +10,7 @@ RSpec.describe Auction do
   end
 
   describe '#add_item' do
-    xit 'can add items to the auction array' do
+    it 'can add items to the auction array' do
       auction = Auction.new
       item1 = Item.new('Chalkware Piggy Bank')
       item2 = Item.new('Bamboo Picture Frame')
@@ -23,7 +23,7 @@ RSpec.describe Auction do
   end
 
   describe '#item_names' do
-    xit 'can list the names of each item' do
+    it 'can list the names of each item' do
       auction = Auction.new
       item1 = Item.new('Chalkware Piggy Bank')
       item2 = Item.new('Bamboo Picture Frame')
