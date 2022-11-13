@@ -13,4 +13,15 @@ class Auction
       item.name
     end
   end
+
+  def unpopular_items
+    unpop = []
+    @items.each do |item_obj|
+#require 'pry' ;binding.pry
+      if item_obj.bids == {}
+        unpop << item_obj
+      end
+    end
+      unpop
+  end
 end
