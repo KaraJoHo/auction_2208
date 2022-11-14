@@ -74,8 +74,8 @@ RSpec.describe Item do
     end
   end
 
-  describe '#unpopular_items' do
-    it 'returns a list of unpopular items from an auction' do
+  describe '#close_bidding' do
+    it 'will update item to not accept additional bids' do
       item1 = Item.new('Chalkware Piggy Bank')
       item2 = Item.new('Bamboo Picture Frame')
       item3 = Item.new('Homemade Chocolate Chip Cookies')
@@ -92,11 +92,17 @@ RSpec.describe Item do
       auction.add_item(item4)
       auction.add_item(item5)
 
-      item1.add_bid(attendee2, 20)
-      item1.add_bid(attendee1, 22)
 
+      item1.add_bid(attendee1, 22)
+      item1.add_bid(attendee2, 20)
       item4.add_bid(attendee3, 50)
-      expect(auction.unpopular_items).to eq([item2, item3, item5])
+      item3.add_bid(attendee2, 15)
+
+      expected = {attendee1 => 22, attendee2 => 20}
+      expect(item1.bids).to eq(expected)
+      item1.close_bidding
+      item1.add_bid(attendee3, 70)
+      expect(item1.bids).to eq(expected)
     end
   end
 end
